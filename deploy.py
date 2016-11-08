@@ -22,3 +22,15 @@ Example:
 '''
 
 PLAYBOOK_DIR = "./playbook/"
+
+def main():
+    
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        prog='deploy',
+        description='The command for deploying module to AWS'
+    )
+    parser.add_argument('env', help='environment : dev,qa,ppe,prod ')
+    parser.add_argument('container', help='container : ... ')
+    parser.add_argument('tag', help='docker image tag: ... ')
+    main()
