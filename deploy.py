@@ -21,10 +21,10 @@ Example:
     python deploy.py qa container-name tag
 '''
 
-PLAYBOOK_DIR = "./playbook/"
+PLAYBOOK_DIR = './playbook/'
 
 def main():
-    
+    print 'hello deploy'
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         prog='deploy',
