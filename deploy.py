@@ -1,16 +1,11 @@
 #!/usr/bin/env python
 import os
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
 import argparse
-import subprocess
-import json
-import boto3
-import urllib2
-from subprocess import call
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 # coding: utf-8
 
-__Author__ = 'yren'
+__Author__ = 'Yufei'
 __Date__ = 'Nov 8, 2016'
 
 USAGE = '''
@@ -22,6 +17,7 @@ Example:
 '''
 
 PLAYBOOK_DIR = './playbook/'
+
 
 def main():
     print 'hello deploy'
