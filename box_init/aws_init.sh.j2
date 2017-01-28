@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# This shell is a template for init instance in AWS
+
+set -e
+#set -x
+
+PATH=/usr/local/bin:$PATH
+
+#export http_proxy=
+#export https_proxy=$http_proxy
+#export no_proxy=localhost,169.254.169.254
+
+export instance_hostname=`curl http://169.254.169.254/latest/meta-data/hostname`
+export local_ip=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
+export instance_id=`curl http://169.254.169.254/latest/meta-data/instance-id`
+export AWS_DEFAULT_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region | awk -F\" '{print $4}'`
+
+mkdir -p /rt/logs/ansible
+
+# download default ansible playbook
+mkdir -p /rt/ansible/default
+aws s3 cp s3://{{ env }}-auto-scaling-metadata/ansible-playbook.tar.gz /rt/ansible/de fault
+cd /rt/ansible/default
+tar xzf ansible-playbook.tar.gz
+
+# download host ansible playbook
+aws s3 cp s3://{{ env }}-auto-scaling-metadata/{{ host_name }} /rt/ansible/ --recursive
+
+cd_ansible() {
+    container=$1
+    if [ -f "/rt/ansible/${container}/ansible-playbook.tar.gz" ]
+    then
+        cd /rt/ansible/${container}
+        tar xzf ansible-playbook.tar.gz
+    else
+        cd /rt/ansible/default
+    fi
+}
+
+# deploy ansible playbook localhost
+{% for command in commands %}
+cd_ansible {{ command.container }}
+./deploy.py {{ command.env }} {{ command.container }} {{ command.tag }} {{ command.cache_opt }} -host localhost
+{% endfor %}
+
+rm -rf /rt/ansible
