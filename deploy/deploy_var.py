@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 import yaml
 import json
@@ -33,3 +34,20 @@ class bcolors:
             return self.__class__.__dict__[attr.upper()] + line + self.__class__.__dict__['ENDC']
 
         return wrap
+
+def read_all_containers():
+    """ read all container's deployment spec"""
+    with open("group_vars/container/container_frontend.yml", 'r') as stream:
+        try:
+            fe_data = yaml.load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+    with open("group_vars/container/container_backend.yml", 'r') as stream:
+        try:
+            be_data = yaml.load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+    fe_data.update(be_data)
+    return fe_data
+    
+print read_all_containers()
