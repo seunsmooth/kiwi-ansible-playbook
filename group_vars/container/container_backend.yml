@@ -1,2 +1,3 @@
-yufei:
-  test: 'test1'
+ntranswriter :
+  hostname : ntranswriter
+  playbook : newstrans.yml
