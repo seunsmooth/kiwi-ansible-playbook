@@ -18,7 +18,7 @@ box_type_no_env="`echo $box_type |cut -f 2- -d "_"`"
 echo "box_type = ${box_type}, env = ${env}, box_type_no_env = ${box_type_no_env}"
 
 rm -rf /tmp/${box_type_no_env}-init.sh
-cho "aws configure set default.s3.signature_version s3v4"
+echo "aws configure set default.s3.signature_version s3v4"
 aws configure set default.s3.signature_version s3v4
 s3_init_sh="s3://${env}-auto-scaling-metadata/${box_type_no_env}-init.sh"
 
