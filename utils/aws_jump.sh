@@ -4,9 +4,9 @@
 ### Desc: This shell use for aws jump util
 
 ## echo colorful text
-red="\033[31m"
-blue="\033[35m"
-normal="\033[m"
+red="\e[31m"
+purple="\e[35m"
+normal="\e[m"
 
 
 export AWS_DEFAULT_REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | grep region | awk -F\" '{print $4}'`
@@ -28,5 +28,5 @@ jump() {
 }
 
 echo -e "${red}hello red world${normal}"
-echo -e "${blue}hello blue world${normal}"
+echo -e "${purple}hello blue world${normal}"
 echo -e "hello world"
