@@ -6,7 +6,7 @@
 ## set exit when meet error
 set -e
 
-export AWS_DEFAULT_REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
+export AWS_DEFAULT_REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | grep region | awk -F\" '{print $4}'`
 echo "AWS_DEFAULT_REGION = ${AWS_DEFAULT_REGION}"
 
 instance_id=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
