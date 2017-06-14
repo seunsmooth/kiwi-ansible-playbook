@@ -6,10 +6,10 @@
 ## set exit when meet error
 set -e
 
-export AWS_DEFAULT_REGION=`curl http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
+export AWS_DEFAULT_REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document|grep region|awk -F\" '{print $4}'`
 echo "AWS_DEFAULT_REGION = ${AWS_DEFAULT_REGION}"
 
-instance_id=`curl http://169.254.169.254/latest/meta-data/instance-id`
+instance_id=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
 echo "instance_id = ${instance_id}"
 
 box_type="`aws ec2 describe-tags --filters "Name=resource-id,Values=$instance_id" "Name=key,Values=box_type" --output=text --query Tags[].Value`"
