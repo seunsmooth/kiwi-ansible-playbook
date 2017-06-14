@@ -4,9 +4,10 @@
 ### Desc: This shell use for aws jump util
 
 ## echo colorful text
-echo_red='echo "\033[31m"'
-echo_blue='echo "\033[35m"'
-echo_normal='echo "\033[m"'
+red=`echo "\033[31m"`
+blue=`echo "\033[35m"`
+end=`echo "\033[m"`
+
 
 export AWS_DEFAULT_REGION=`curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | grep region | awk -F\" '{print $4}'`
 instance_id=`curl -s http://169.254.169.254/latest/meta-data/instance-id`
@@ -25,3 +26,5 @@ jump() {
     ip_list=$(aws ec2 describe-instances --filters "Name=tag:box_type, Values=$box_type" "Name=instance-state-name, Values=running" --query='Reservations[].Instances[].PrivateIpAddress' --output text)
   fi
 }
+
+echo -e "${red} hello red world ${end}"
