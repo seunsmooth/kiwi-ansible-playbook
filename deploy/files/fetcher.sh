@@ -1,7 +1,7 @@
 #!/bin/bash
 ### Author: Yufei
 ### Date: 2017.06.14
-### Desc: shell for fetch init shell
+### Desc: shell for fetch auto scaling init shell
 
 ## set exit when meet error
 set -e
