@@ -14,6 +14,7 @@ Example:
     deploy.py dev kiwi-ghost 0.0.1
 '''
 
+
 def init_args(args):
     command_vars = {}
     command_vars.update(vars(args))
