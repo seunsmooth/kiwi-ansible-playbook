@@ -56,5 +56,4 @@ if __name__ == '__main__':
                         help='disable apache page cache, works only for apache container')
     parser.add_argument('-d', '--debug', action='store_true',
                         help='enable debug model for container, start with container with /bin/bash')
-    args = parser.parse_args()
-    init_args(args)
+    init_args(parser.parse_args())
